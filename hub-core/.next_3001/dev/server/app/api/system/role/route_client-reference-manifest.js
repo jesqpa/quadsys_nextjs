@@ -1,1 +1,0 @@
-globalThis.__RSC_MANIFEST=(globalThis.__RSC_MANIFEST||{});globalThis.__RSC_MANIFEST["/api/system/role/route"]={"moduleLoading":{"prefix":"/_next/"},"ssrModuleMapping":{},"edgeSSRModuleMapping":{},"clientModules":{},"entryCSSFiles":{"E:\\Proyectos desarrollo\\quadsys_nextjs\\hub-core\\src\\app\\api\\system\\role\\route":[]},"rscModuleMapping":{},"edgeRscModuleMapping":{}};
