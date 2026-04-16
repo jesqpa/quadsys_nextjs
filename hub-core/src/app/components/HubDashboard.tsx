@@ -13,12 +13,16 @@ import {
   Check, 
   Loader2, 
   Info,
-  RefreshCw
+  RefreshCw,
+  Settings,
+  Sun,
+  Moon
 } from "lucide-react";
 import { getDashboardStats, generateNewToken, getFederatedNodes, createBranch } from "../actions";
 
 export default function HubDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
+  const [isDark, setIsDark] = useState(true);
   const [stats, setStats] = useState({ activeNodes: 0, totalTickets: 0, status: "Loading..." });
   const [nodes, setNodes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -27,6 +31,14 @@ export default function HubDashboard() {
   const [showProvisionModal, setShowProvisionModal] = useState(false);
   const [provisionData, setProvisionData] = useState({ name: "", location: "" });
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   const fetchAll = async () => {
     setLoading(true);
@@ -67,48 +79,65 @@ export default function HubDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-neutral-900 via-black to-black text-white p-6">
-      <div className="fixed inset-0 overflow-hidden pointer-events-none mb-10">
-        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/10 blur-[100px] rounded-full" />
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-500 relative overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-[-5%] right-[-5%] w-[60%] h-[60%] bg-primary/30 blur-[130px] rounded-full opacity-60 dark:opacity-40" />
+        <div className="absolute bottom-[-5%] left-[-5%] w-[50%] h-[50%] bg-secondary/30 blur-[110px] rounded-full opacity-60 dark:opacity-40" />
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-8 relative z-10">
-        <nav className="flex items-center justify-between p-4 glass rounded-2xl border-white/5">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center neon-glow">
-              <Globe className="text-primary-foreground w-6 h-6" />
+      <div className="max-w-7xl mx-auto p-6 space-y-8 relative z-10">
+          <nav className="flex items-center justify-between p-4 glass rounded-2xl border-border">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center neon-glow">
+                <Globe className="text-primary-foreground w-6 h-6" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold tracking-tighter">SMART-CliM</h1>
+                <p className="text-[10px] text-primary uppercase tracking-[0.2em] font-semibold">Global Integrator</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-xl font-bold tracking-tighter">SMART-CliM</h1>
-              <p className="text-[10px] text-primary uppercase tracking-[0.2em] font-semibold">Global Integrator</p>
+            
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => setIsDark(!isDark)}
+                className="p-2.5 rounded-xl bg-secondary/20 hover:bg-secondary/30 transition-all border border-secondary/10 text-foreground"
+              >
+                {isDark ? <Sun size={18} className="text-amber-400" /> : <Moon size={18} className="text-indigo-400" />}
+              </button>
+              
+              <button onClick={fetchAll} className="p-2 rounded-xl hover:bg-white/5 transition-colors text-muted-foreground hover:text-foreground">
+                <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
+              </button>
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/10 border border-border">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-xs font-medium text-muted-foreground">Hub Active</span>
+              </div>
             </div>
-          </div>
-          
-          <div className="flex items-center gap-4">
-            <button onClick={fetchAll} className="p-2 rounded-xl hover:bg-white/5 transition-colors text-neutral-400 hover:text-white">
-              <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
-            </button>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-xs font-medium text-neutral-400">Hub Active</span>
-            </div>
-          </div>
-        </nav>
+          </nav>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <aside className="md:col-span-1 space-y-4">
             <div className="glass rounded-2xl p-2 space-y-1">
+              <p className="text-[10px] font-bold text-neutral-600 uppercase tracking-[0.2em] px-4 py-2">Administración</p>
               <NavItem icon={<LayoutDashboard size={18}/>} label="Overview" active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
               <NavItem icon={<Server size={18}/>} label="Federated Nodes" active={activeTab === "nodes"} onClick={() => setActiveTab("nodes")} />
+              <NavItem icon={<Activity size={18}/>} label="Global Analytics" active={activeTab === "analytics"} onClick={() => setActiveTab("analytics")} />
+              
+              <p className="text-[10px] font-bold text-neutral-600 uppercase tracking-[0.2em] px-4 py-2 mt-4">Sistema</p>
+              <NavItem icon={<Shield size={18}/>} label="Security Hub" active={activeTab === "security"} onClick={() => setActiveTab("security")} />
+              <NavItem icon={<Settings size={18}/>} label="Global Settings" active={activeTab === "settings"} onClick={() => setActiveTab("settings")} />
             </div>
 
-            <div className="glass rounded-2xl p-6 border-primary/20 bg-primary/5">
-              <h3 className="text-sm font-semibold mb-2">Provisión de Nodos</h3>
+            <div className="glass rounded-2xl p-6 border-primary/20 bg-primary/5 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:rotate-12 transition-transform">
+                <Plus size={40} className="text-primary" />
+              </div>
+              <h3 className="text-sm font-semibold mb-2 relative z-10">Provisión de Nodos</h3>
+              <p className="text-[10px] text-neutral-500 mb-4 relative z-10">Despliega nuevas instancias para sucursales.</p>
               <button 
                 onClick={() => setShowProvisionModal(true)}
                 disabled={generating}
-                className="w-full py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs flex items-center justify-center gap-2 hover:scale-[1.02] transition-all"
+                className="w-full py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs flex items-center justify-center gap-2 hover:scale-[1.02] transition-all relative z-10"
               >
                 {generating ? <Loader2 size={14} className="animate-spin" /> : <Plus size={14} />}
                 Provisionar Nodo
