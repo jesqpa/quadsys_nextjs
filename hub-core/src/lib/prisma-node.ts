@@ -6,13 +6,10 @@ const clients: Record<string, PrismaClient> = {};
 export function getPrismaNode(branchId: string) {
   if (clients[branchId]) return clients[branchId];
 
-  let dbUrl = "file:E:/Proyectos desarrollo/quadsys_node.db";
+  let dbUrl = process.env.LOCAL_DB_URL || "file:./data/node.db";
   
-  if (branchId !== "test-branch-id") {
-    dbUrl = `file:E:/Proyectos desarrollo/quadsys_node_${branchId.slice(0, 8)}.db`;
-    if (branchId === "bfcc673a-aa09-48bf-ad9e-701192a349df") {
-        dbUrl = "file:E:/Proyectos desarrollo/quadsys_node_norte.db";
-    }
+  if (branchId !== "test-branch-id" && !process.env.LOCAL_DB_URL) {
+    dbUrl = `file:../data/node_${branchId.slice(0, 8)}.db`;
   }
 
   console.log(`[Database Selector] Branch: ${branchId} -> DB: ${dbUrl}`);

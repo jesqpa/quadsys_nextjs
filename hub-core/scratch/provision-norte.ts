@@ -15,12 +15,13 @@ async function main() {
 HUB_URL="http://localhost:3000"
 STATION_TOKEN="${result.token}"
 BRANCH_ID="${result.branchId}"
-LOCAL_DB_URL="file:E:/Proyectos desarrollo/quadsys_node_norte.db"
+LOCAL_DB_URL="file:../data/node_norte.db"
 PRISMA_SCHEMA="node"
 `;
 
-    fs.writeFileSync(path.join(process.cwd(), ".env.norte"), envContent);
-    console.log("Archivo .env.norte generado.");
+    const fileName = `.env_${result.token}`;
+    fs.writeFileSync(path.join(process.cwd(), fileName), envContent);
+    console.log(`Archivo ${fileName} generado.`);
   } else {
     console.error("Error creando sucursal:", result.error);
     process.exit(1);

@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
-  const role = process.env.APP_ROLE || 'ALL'; // HUB, NODE, o ALL para desarrollo
+export default function proxy(request: NextRequest) {
+  const role = process.env.APP_ROLE || 'ALL'; 
+  const branchId = process.env.BRANCH_ID;
   const url = request.nextUrl.pathname;
 
   // Si el servidor está en modo HUB, bloqueamos las interfaces de operación local
@@ -13,9 +14,10 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Si el servidor está en modo NODE, bloqueamos el Dashboard central
+  // Si el servidor está en modo NODE
   if (role === 'NODE') {
-    const isHubRoute = url === '/' || url.startsWith('/supervisor');
+    // Si intenta entrar al supervisor del HUB (dashboard global)
+    const isHubRoute = url.startsWith('/supervisor') && !url.includes('local');
     if (isHubRoute) {
       return new NextResponse('Acceso Denegado: Este servidor solo opera como Micro-Nodo.', { status: 403 });
     }

@@ -2,6 +2,7 @@
 
 import { QueueService } from "@/node/queue.service";
 import { revalidatePath } from "next/cache";
+import { getPrismaNode } from "@/lib/prisma-node";
 
 export async function issueTicket(branchId: string, category: string, isPriority: boolean = false) {
   try {
@@ -50,5 +51,30 @@ export async function getDisplayData(branchId: string) {
   } catch (error) {
     console.error("Error fetching display data:", error);
     return { current: null, history: [] };
+  }
+}
+
+export async function getNodeConfig() {
+  return {
+    branchId: process.env.BRANCH_ID || 'unknown',
+    branchName: process.env.BRANCH_NAME || 'Sucursal Desconocida',
+    role: process.env.APP_ROLE || 'ALL'
+  };
+}
+
+export async function getSyncStatus(branchId: string) {
+  try {
+    const prisma = getPrismaNode(branchId);
+    const total = await prisma.localTicket.count();
+    const pending = await prisma.localTicket.count({ where: { syncedWithHub: false } });
+    
+    return {
+      success: true,
+      total,
+      pending,
+      synced: total - pending,
+    };
+  } catch (error: any) {
+    return { success: false, error: error.message };
   }
 }

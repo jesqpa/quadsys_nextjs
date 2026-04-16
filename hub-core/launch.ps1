@@ -27,5 +27,14 @@ if (Test-Path $EnvFile) {
 [System.Environment]::SetEnvironmentVariable("APP_ROLE", $Role, "Process")
 [System.Environment]::SetEnvironmentVariable("PORT", $Port, "Process")
 
+if ($Role -eq "NODE") {
+    Write-Host "Verificando esquema de base de datos local..." -ForegroundColor Yellow
+    $dbUrl = [System.Environment]::GetEnvironmentVariable("LOCAL_DB_URL", "Process")
+    if ($dbUrl) {
+        Write-Host "Sincronizando DB: $dbUrl" -ForegroundColor Gray
+        npx prisma db push --schema .\prisma\node.prisma --accept-data-loss
+    }
+}
+
 # Ejecutamos Next.js
 npx next dev --webpack --port $Port

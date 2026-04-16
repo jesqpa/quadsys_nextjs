@@ -15,7 +15,11 @@
 
 # next.js
 /.next/
+/.next_*/
 /out/
+
+# data
+/hub-core/data/
 
 # production
 /build
