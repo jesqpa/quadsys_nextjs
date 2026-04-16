@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/node-client"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model LocalTicket {
+  id             String       @id @default(uuid())
+  number         String // Ej: A01
+  status         TicketStatus @default(WAITING)
+  priorityLevel  Int          @default(0) // 0-100
+  isPriority     Boolean      @default(false)
+  isReassigned   Boolean      @default(false)
+  hasAppointment Boolean      @default(false)
+  assignedTo     String? // ID del usuario/puesto
+  metadata       String? // JSON stringified para formularios dinámicos
+  arrivalTime    DateTime     @default(now())
+  calledTime     DateTime?
+  finishedTime   DateTime?
+
+  // Sincronización
+  syncedWithHub Boolean @default(false)
+  hubTicketId   String?
+}
+
+enum TicketStatus {
+  WAITING
+  CALLING
+  SERVING
+  FINISHED
+  CANCELLED
+}
+
+model LocalConfig {
+  id             Int       @id @default(1)
+  branchId       String
+  branchName     String
+  organizationId String
+  hubToken       String
+  lastSync       DateTime?
+}

@@ -1,0 +1,44 @@
+{
+    "marca": "Skiveld",
+    "objetivo": "Mantener consistencia visual en UI y landings, proyectando profesionalidad, innovación y eficiencia para una empresa de automatización y marketing.",
+    "paleta": {
+        "principal": "#276395",
+        "secundario": "#71B93F",
+        "acento": "#CC0000",
+        "fondo": "#FFFFFF",
+        "superficie": "#F8F9FA",
+        "texto": {
+            "principal": "#000000",
+            "secundario": "#4A4A4A"
+        },
+        "bordes": "#E2E8F0"
+    },
+    "tipografia": {
+        "titulares": "Poppins, sans-serif",
+        "cuerpo": "Inter, sans-serif",
+        "pesos": {
+            "normal": 400,
+            "medio": 500,
+            "negrita": 700
+        }
+    },
+    "formas": {
+        "radio_tarjeta": "8px",
+        "radio_boton": "6px",
+        "radio_input": "6px"
+    },
+    "espaciado": {
+        "xs": "4px",
+        "sm": "8px",
+        "md": "16px",
+        "lg": "24px",
+        "xl": "32px",
+        "xxl": "48px"
+    },
+    "componentes": {
+        "boton_principal": "Fondo azul (#276395), texto en blanco. Hover ligeramente más oscuro. Ideal para acciones principales.",
+        "boton_secundario": "Fondo verde (#71B93F), texto en blanco. Ideal para conversiones o destacar elementos positivos.",
+        "tarjetas": "Fondo blanco puro con bordes muy sutiles (#E2E8F0), sombra ligera y diseño espacioso.",
+        "layout": "Limpio, tecnológico y organizado. Amplio uso de espacio en blanco para reducir la carga cognitiva."
+    }
+}

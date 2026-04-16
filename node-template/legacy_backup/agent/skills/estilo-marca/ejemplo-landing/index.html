@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skiveld | Automatización y Marketing</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS (CDN for quick preview) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        principal: '#276395',
+                        secundario: '#71B93F',
+                        acento: '#CC0000',
+                        textoPrin: '#000000',
+                        textoSec: '#4A4A4A',
+                        superficie: '#F8F9FA',
+                        bordes: '#E2E8F0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif']
+                    },
+                    borderRadius: {
+                        'tarjeta': '8px',
+                        'boton': '6px',
+                        'input': '6px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .heading {
+                @apply font-heading text-textoPrin font-bold;
+            }
+            .body-text {
+                @apply font-sans text-textoSec;
+            }
+            .btn-principal {
+                @apply bg-principal text-white px-6 py-3 rounded-boton font-sans font-medium hover:bg-principal/90 transition shadow-sm;
+            }
+            .btn-secundario {
+                @apply bg-secundario text-white px-6 py-3 rounded-boton font-sans font-medium hover:bg-secundario/90 transition shadow-sm;
+            }
+            .card {
+                @apply bg-white border border-bordes rounded-tarjeta p-8 shadow-sm hover:shadow-md transition;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-superficie antialiased selection:bg-principal selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-bordes py-4 px-8 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <img src="./logo.png" alt="Skiveld" class="h-10 w-auto">
+            </div>
+            <div class="hidden md:flex gap-8 items-center body-text font-medium text-sm">
+                <a href="#servicios" class="hover:text-principal transition">Servicios</a>
+                <a href="#casos" class="hover:text-principal transition">Casos de Uso</a>
+                <a href="#contacto" class="btn-principal text-sm">Agenda tu asesoría gratuita</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="max-w-7xl mx-auto px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="text-principal font-bold tracking-wider text-sm uppercase mb-4 block">Ecosistema
+                Inteligente</span>
+            <h1 class="heading text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
+                Automatiza tus procesos manuales y multiplica tus resultados.
+            </h1>
+            <p class="body-text text-lg mb-8 max-w-lg">
+                Deja las tareas repetitivas de tu negocio en manos de nuestro software y concéntrate en lo que realmente
+                importa: hacer crecer tu empresa de forma medible y eficiente.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#" class="btn-secundario">Ver demostración del software</a>
+                <a href="#"
+                    class="btn-principal bg-white text-principal border border-principal hover:bg-gray-50">Calcular
+                    ahorro de tiempo</a>
+            </div>
+        </div>
+        <div class="relative">
+            <!-- Emulated dashboard or tech graphic -->
+            <div
+                class="bg-white rounded-tarjeta border border-bordes p-6 shadow-lg relative z-10 w-full aspect-video flex flex-col justify-center items-center">
+                <div class="w-full h-4 bg-superficie rounded-full mb-4 overflow-hidden flex">
+                    <div class="h-full bg-secundario w-3/4"></div>
+                    <div class="h-full bg-principal w-1/4"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 w-full h-full">
+                    <div
+                        class="h-full bg-superficie rounded-tarjeta border border-bordes p-3 flex flex-col justify-between">
+                        <div class="h-3 w-1/2 bg-gray-200 rounded"></div>
+                        <div class="h-10 w-3/4 bg-secundario rounded mt-auto"></div>
+                    </div>
+                    <div
+                        class="h-full bg-superficie rounded-tarjeta border border-bordes p-3 flex flex-col justify-between">
+                        <div class="h-3 w-1/2 bg-gray-200 rounded"></div>
+                        <div class="h-14 w-1/2 bg-principal rounded mt-auto"></div>
+                    </div>
+                    <div
+                        class="h-full bg-superficie rounded-tarjeta border border-bordes p-3 flex flex-col justify-between">
+                        <div class="h-3 w-1/2 bg-gray-200 rounded"></div>
+                        <div class="h-20 w-full bg-acento opacity-80 rounded mt-auto"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Decorative accent -->
+            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-acento rounded-full opacity-10 blur-2xl z-0"></div>
+            <div class="absolute -top-6 -left-6 w-48 h-48 bg-principal rounded-full opacity-10 blur-2xl z-0"></div>
+        </div>
+    </header>
+
+    <!-- Value Prop / Services -->
+    <section id="servicios" class="bg-white py-24 border-y border-bordes border-opacity-50">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-16 max-w-2xl mx-auto">
+                <h2 class="heading text-3xl md:text-4xl mb-4">Un control total sobre tus conversiones</h2>
+                <p class="body-text text-lg">Olvídate de las integraciones complejas. Integramos herramientas como
+                    Mautic bajo tu propia marca y dominio.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div
+                        class="w-12 h-12 bg-principal bg-opacity-10 text-principal rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="heading text-xl mb-3">Escala tus ventas</h3>
+                    <p class="body-text text-sm mb-6">Embudos automatizados que captan, nutren y cierran clientes las 24
+                        horas del día. Optimización constante para conversiones reales.</p>
+                    <a href="#" class="text-principal font-medium text-sm hover:underline flex items-center gap-1">Ver
+                        casos de uso <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg></a>
+                </div>
+                <!-- Card 2 -->
+                <div class="card">
+                    <div
+                        class="w-12 h-12 bg-secundario bg-opacity-10 text-secundario rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="heading text-xl mb-3">Automatiza tu gestión</h3>
+                    <p class="body-text text-sm mb-6">Sincroniza tus bases de datos, correos y tareas operativas. Todo
+                        conectado para que nada dependa de la memoria de tu equipo.</p>
+                    <a href="#" class="text-principal font-medium text-sm hover:underline flex items-center gap-1">Ver
+                        ejemplo real <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg></a>
+                </div>
+                <!-- Card 3 -->
+                <div class="card">
+                    <div
+                        class="w-12 h-12 bg-acento bg-opacity-10 text-acento rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="heading text-xl mb-3">Asesoría experta</h3>
+                    <p class="body-text text-sm mb-6">No solo te damos la herramienta, te diseñamos la estrategia
+                        táctica detrás para que tengas una guía de crecimiento paso a paso.</p>
+                    <a href="#" class="text-principal font-medium text-sm hover:underline flex items-center gap-1">Habla
+                        con un asesor <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to action simple -->
+    <section class="max-w-4xl mx-auto px-8 py-24 text-center">
+        <h2 class="heading text-3xl mb-6">¿Listo para simplificar tu día a día?</h2>
+        <p class="body-text text-lg mb-8">Da el primer paso hacia una empresa más automatizada, eficiente y rentable.
+            Sin procesos interminables.</p>
+        <a href="#" class="btn-secundario text-lg px-8 py-4">Agenda tu asesoría gratuita</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-bordes py-8 px-8 flex justify-center text-center body-text text-sm">
+        <p>© 2026 Skiveld. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
