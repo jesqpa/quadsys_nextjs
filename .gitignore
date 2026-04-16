@@ -14,15 +14,16 @@
 /coverage
 
 # next.js
-/.next/
-/.next_*/
-/out/
+.next/
+.next_*/
+out/
 
 # data
+data/
 /hub-core/data/
 
 # production
-/build
+build/
 
 # misc
 .DS_Store
